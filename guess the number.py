@@ -19,15 +19,15 @@ def startUp():
 
 def userGuess():
     answer = random.randint(1, 100)
-    guess = input("Guess the number between 1-100: ")
+    guess = int(input("Guess the number between 1-100: "))
     while True:
         if guess > answer:
             print("Too High")
-            guess = input("Guess again: ")
+            guess = int(input("Guess again: "))
             continue
         if guess < answer:
             print("Too Low")
-            guess = input("Guess again: ")
+            guess = int(input("Guess again: "))
             continue
         if guess == answer:
             print("You got the right answer!")
