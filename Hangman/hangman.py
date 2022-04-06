@@ -4,6 +4,9 @@ import string
 
 def get_valid_word(words):
     word = random.choice(words) #Random Word from this list
+    if str(word) == 'zimmerman' or 'rai':
+        print('ayo')
+        word = random.choice(words) 
     while '-' in word or ' ' in word:
         word = random.choice(words)
     return word.lower()
@@ -95,8 +98,9 @@ def hangman():
         if i == 6:
             break
 
-        # letters used
-        print('You have used these letters: ', ' '.join(used_letters))
+        # showing letters used after the first input
+        if i > 1:    
+            print('You have used these letters: ', ' '.join(used_letters))
 
         # what current word is
         word_list = [letter if letter in used_letters else '_' for letter in word]
