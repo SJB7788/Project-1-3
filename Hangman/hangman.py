@@ -12,7 +12,7 @@ def get_valid_word(words):
         word = random.choice(words)
     while '-' in word or ' ' in word:
         word = random.choice(words)
-    return word.lower()
+    return word.upper()
 
 hang = [ """
      + ===== +
@@ -89,6 +89,7 @@ hang = [ """
 
 def hangman():
     word = get_valid_word(words)
+    print(word)
     word_letters = list(word)
     alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U'
     ,'V', 'W', 'X', 'Y', 'Z']
@@ -118,11 +119,20 @@ def hangman():
             index = alphabet.index(user_guess)
             alphabet.remove(alphabet[index])
             alphabet.insert(index, '#')
+            
+            # adds user guess into used letter set 
+            if user_guess not in used_letters:
+                used_letters.add(user_guess)
+            
             # when guessed wrong, it updates the count of i to update the hangman picture
             if user_guess not in word_letters:
                 i += 1
+                fail_phrases = ["Wrong, Terrible Guess", "WRONG", "Unique Message to inform you that you are wrong",
+                "You Suck KEK", "I don't know how else to say you are wrong", "Current Rank: Plastic 5 (You Suck Basically)"]
+                print(random.choice(fail_phrases))
             if user_guess in word_letters:
                 word_letters.remove(user_guess)
+                print("Lucky Guess")
         elif user_guess in used_letters:
             print("Used Letter")
         else:
