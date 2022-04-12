@@ -9,9 +9,9 @@ question = [
     "What word is always spelled wrong?: ",
     'Quick, write "yes": ',
     "Break it and it gets better; set it and it's harder to break. What am I?: ",
-    "question: ",
-    "question2: ",
-    "question3: ",
+    "The more of this there is, the less you see. What is it?: ",
+    "Should you run a red light?: ",
+    "Does the person who made this quiz want to go home?: ",
 ]
 
 answer = [
@@ -22,9 +22,9 @@ answer = [
     "wrong",
     "yes",
     "record",
-    "answer",
-    "answer2",
-    "answer3"
+    "darkness",
+    "no",
+    "yes"
 ]
 
 def startQuiz():
@@ -42,6 +42,7 @@ def startQuiz():
             continue
 
 def quiz():
+    global score
     score = 0
     wrongStreak = 0
     
@@ -62,10 +63,18 @@ def quiz():
             
             #subtracting the inital time and final time to see if it took 2 seconds to answer
             totalTime = time2 - time1
-            if int(totalTime) == 2:
-                print("Good Reaction Time")
-            else:
-                print("Tsk tsk, Too Slow")
+            print(str(totalTime) + 's')
+            if int(totalTime) == 0 and userAnswer == answer[i]:
+            #because its int, it will round down so tehcnically the user has 1 second to respond
+                print("Good Reaction Time\n")
+                time.sleep(1)
+                continue
+            if totalTime > 1:
+                print("Tsk tsk, Too Slow\n")
+                time.sleep(1)
+                continue
+            else: 
+                print("Wrong")
                 continue
         userAnswer = input(question[i])
         if userAnswer == answer[i]:
@@ -73,10 +82,26 @@ def quiz():
             wrongStreak = 0
             print("Score: " + str(score) + "\n")
         else:
-            print("wrong")
+            print("wrong\n")
             wrongStreak += 1
             if wrongStreak == 5:
-                print("Damn you got 5 wrong in a row. Impressive")
+                print("Damn you got 5 wrong in a row. Impressive\n")
         time.sleep(1)
+    
+    endScreen()
+    
+
+def endScreen():
+    print("Final Score: " + str(score))
+    while True:
+        replay = input("Play Again? (Y/N): ").upper()
+        if replay == "Y":
+            quiz()
+        if replay == "N":
+            print("Good Bye")
+            break
+        else:
+            print("Invalid Response")
+            continue
 
 startQuiz()
