@@ -17,21 +17,22 @@ You have 4 options: W (foward) A (backward) S (left) D (right)
 What will you do?:
 """
 
+
+
 """
  ____________________________________________ 
-|                 Inventory                  |
+|             Character Profile              |
 | ▯ Helmet (LV.1)          LV. Points: 0    |
 | ▯ Chestplate (LV.1)                       |
 | ▯ Boots (LV.1)                            |
-|                                            |
+| ------------------------------------------ |
 | ▯ Sword (LV.1)                            |
-|                        ____________________|
-| Armor: 10             | Items:             |
-| Health: 100           |    HP Potion: 5    |
-| Speed: 5              |                    |
-|
-|
-|
+| ------------------------------------------ |
+| Stats:                                     |
+|   ATK: 10                                  |
+|   Armor: 10                                |
+|   Health: 100                              |
+|   Speed: 5                                 |
 |____________________________________________|
 
 
