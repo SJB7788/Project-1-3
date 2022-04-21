@@ -82,17 +82,28 @@ def fightSequence():
         "|____________________________________________|"
     ]
     
-    slime = mob("Slime", 20, 5, 0, 1)  # creating a new mob which is a slime
+    slime = mob("Slime", 20, 10, 0, 1)  # creating a new mob which is a slime
+    # Enemy attack function to not flood the code with the same shiz
     def enemyATK():
+            time.sleep(1)
             print("The slime attacks!")
             time.sleep(0.5)
             print(f"It dealt {slime.ATK} to your health!\n")
             statLvl["Health"] -= slime.ATK
     # the actual fight sequence
     while True:
+        # health == 0 => game over
+        if statLvl["Health"] == 0:
+            time.sleep(1)
+            print(f'Your Health: {statLvl["Health"]}')
+            time.sleep(1)
+            print("You really lost to a slime. You should be ashamed")
+            time.sleep(1)
+            print("Game Over")
+            break
         time.sleep(1)
+        # print name of the enemy, the lvl, enemy health and the players health
         print(f'{slime.name} LVL.{slime.LVL} \nEnemy Health: {slime.health}\n\nYour Health: {statLvl["Health"]}\n')
-        
         time.sleep(1)
         userFightInput = input(
             "You have these options:\nA(Attack), S(Stats), R(Run): ").upper()
