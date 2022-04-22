@@ -29,9 +29,11 @@ def textRPGStart():
 
 # useless text to lower expectations
 def textRPG():
+    global name
     print("This game is only a tech demo and only contains the combat sequence\n")
     time.sleep(2)
-    print("You have encountered a slime!\n")
+    name = input("Player's Name: ")
+    print(f"{name} have encountered a slime!\n")
     time.sleep(1)
     fightSequence()
 
@@ -88,16 +90,16 @@ def fightSequence():
             time.sleep(1)
             print("The slime attacks!")
             time.sleep(0.5)
-            print(f"It dealt {slime.ATK} to your health!\n")
+            print(f"It dealt {slime.ATK} to {name} health!\n")
             statLvl["Health"] -= slime.ATK
     # the actual fight sequence
     while True:
         # health == 0 => game over
         if statLvl["Health"] <= 0:
             time.sleep(1)
-            print(f'Your Health: {statLvl["Health"]}')
+            print(f'{name} Health: {statLvl["Health"]}')
             time.sleep(1)
-            print("You really lost to a slime. You should be ashamed")
+            print(f"{name} really lost to a slime. {name} should be ashamed")
             time.sleep(1)
             print("Game Over")
             break
@@ -109,13 +111,14 @@ def fightSequence():
             "You have these options:\nA(Attack), S(Stats), R(Run): ").upper()
         if userFightInput == "A":
             time.sleep(1)
-            print("\nYou hit the slime")
+            print(f"\n{name} hit the slime")
             time.sleep(1)
-            print("\nYou dealt " +
+            print(f"\n{name} dealt " +
                   str(statLvl["ATK"]) + " Damage to the slime\n")
             slime.health = slime.health - statLvl["ATK"]
             if slime.health <= 0:
-                print("You have defeated the slime!")
+                time.sleep(1)
+                print(f"{name} have defeated the slime!")
                 break
             enemyATK()
             continue
