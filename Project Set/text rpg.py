@@ -93,7 +93,7 @@ def fightSequence():
     # the actual fight sequence
     while True:
         # health == 0 => game over
-        if statLvl["Health"] == 0:
+        if statLvl["Health"] <= 0:
             time.sleep(1)
             print(f'Your Health: {statLvl["Health"]}')
             time.sleep(1)
@@ -114,7 +114,7 @@ def fightSequence():
             print("\nYou dealt " +
                   str(statLvl["ATK"]) + " Damage to the slime\n")
             slime.health = slime.health - statLvl["ATK"]
-            if slime.health == 0:
+            if slime.health <= 0:
                 print("You have defeated the slime!")
                 break
             enemyATK()
@@ -157,8 +157,4 @@ def fightSequence():
         else:
             print("Invalid Input\n")
 
-
-
-
-fightSequence()
-#textRPGStart()
+textRPGStart()
