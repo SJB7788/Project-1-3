@@ -92,7 +92,7 @@ def quiz():
     
 
 def endScreen():
-    print("Final Score: " + str(score))
+    print("Final Score: " + str(score) + "/10")
     while True:
         replay = input("Play Again? (Y/N): ").upper()
         if replay == "Y":
