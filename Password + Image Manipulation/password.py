@@ -1,13 +1,8 @@
 from cryptography.fernet import Fernet
 
 master_pwd = input("Master Password?: ")
+phone_num = input("What is your phone number?: ")
 
-"""
-def write_key():
-    key = Fernet.generate_key()
-    with open("Password + Image Manipulation\key.key", "wb") as key_file:
-        key_file.write(key)
-"""
 def load_key():
     file = open("Password + Image Manipulation\key.key", "rb")
     key = file.read()
@@ -32,7 +27,7 @@ def add():
         f.write(name + "|" + fer.encrypt(pwd.encode()).decode() + "\n")
 
 while True:
-    mode = input("\nAdd new password or view existing passwords(A = Add, V = View, Q = Quit): ").upper()
+    mode = input("\nAdd new password or view existing passwords? (A = Add, V = View, Q = Quit): ").upper()
     if mode == "Q":
         print("Good bye")
         break
