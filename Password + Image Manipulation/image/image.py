@@ -88,7 +88,37 @@ def thumbnail():
             continue
 
 def rotation():
-    ()
+    jpegList = []
+    while True:
+        time.sleep(1)
+        for i in os.listdir('Password + Image Manipulation\image\jpeg images'):
+            print(i)
+            jpegList.append(i) 
+        time.sleep(1)
+        userOpen = input('\nWhich images would you like to rotate?: ')
+        if userOpen in (jpegList): 
+            break
+        else: 
+            print("\nInvalid Input\n")
+            continue
+
+    selectImage = Image.open('Password + Image Manipulation\image\jpeg images\{}'.format(userOpen))
+
+    while True:
+        userDegree = input("By what degree would you like to rotate the image? (90, 180, 270): ")
+        if userDegree == '90':
+            rotatedImage = selectImage.transpose(Image.ROTATE_90)
+            break
+        if userDegree == '180':
+            rotatedImage = selectImage.transpose(Image.ROTATE_180)
+            break
+        if userDegree == '270':
+            rotatedImage = selectImage.transpose(Image.ROTATE_270)
+            break
+        else: 
+            print("Invalid Input") 
+            continue
+    rotatedImage.show()
 
 
 
@@ -122,3 +152,4 @@ while True:
 """   
 #jpegToPng()
 #thumbnail()
+rotation()
