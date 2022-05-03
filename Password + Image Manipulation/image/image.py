@@ -1,6 +1,21 @@
-from PIL import Image
+from tokenize import Number
+from PIL import Image, ImageFilter
 import os
 import time
+
+"""
+I made one big file of all the functions of each feature
+At the bottom of the file, there is a running code section with all the functions already written down
+Run the function as needed
+One thing to note:
+    The png folder is empty as there is a function to turn the jpeg files to png. So if you want to view image of the png 
+    folder, you will have to convert jpeg to png first and then view png file
+"""
+
+
+
+
+
 
 
 # function for user to input what image they want to view
@@ -13,7 +28,7 @@ def openImageJpeg():
             print(i)
             jpegList.append(i) # makes a list to the if statement later to make sure user inputs a picture thats in the foler
         time.sleep(1)
-        userOpen = input('\nWhich images would you like to open and view?: ')
+        userOpen = input('\nWhich images would you like to open and view?: ').lower()
         if userOpen in (jpegList): #if user input is in the jpegList
             break
         else: 
@@ -21,6 +36,18 @@ def openImageJpeg():
             continue
     open = Image.open('Password + Image Manipulation\image\jpeg images\{}'.format(userOpen))
     open.show()
+
+    while True:
+        continOpen = input("\nWould you like to open another image? (Y/N): ").upper()
+        
+        if continOpen == 'Y':
+            openImageJpeg()
+        if continOpen == 'N':
+            break
+        else:
+            print('Invalid Response')
+            continue
+
 # Png folder
 def openImagePng():
     pngList = [] 
@@ -29,15 +56,29 @@ def openImagePng():
         for i in os.listdir('Password + Image Manipulation\image\png images'):
             print(i)
             pngList.append(i) # makes a list to the if statement later to make sure user inputs a picture thats in the foler
+        if len(os.listdir('Password + Image Manipulation\image\png images')) == 0:
+            print("The folder is empty!")
+            break
         time.sleep(1)
-        userOpen = input('\nWhich images would you like to open and view?: ')
+        userOpen = input('\nWhich images would you like to open and view?: ').lower()
         if userOpen in (pngList): #if user input is in the jpegList
+            open = Image.open('Password + Image Manipulation\image\png images\{}'.format(userOpen))
+            open.show()
             break
         else: 
             print("\nInvalid Input\n")
             continue
-    open = Image.open('Password + Image Manipulation\image\png images\{}'.format(userOpen))
-    open.show()
+   
+
+    while True:
+        continOpen = input("\nWould you like to open another image? (Y/N): ").upper()
+        if continOpen == 'Y':
+            openImagePng()
+        if continOpen == 'N':
+            break
+        else:
+            print('Invalid Response')
+            continue
 
 # functions to save images that ends with .jpeg as .png into the /png images folder
 def jpegToPng():
@@ -57,7 +98,7 @@ def thumbnail():
             print(i)
             jpegList.append(i) 
         time.sleep(1)
-        userOpen = input('\nWhich images would you like to make a thumbnail?: ')
+        userOpen = input('\nWhich images would you like to make a thumbnail?: ').lower()
         if userOpen in (jpegList): 
             break
         else: 
@@ -87,6 +128,7 @@ def thumbnail():
             print("Invalid Input")
             continue
 
+# rotate images, show and save
 def rotation():
     jpegList = []
     while True:
@@ -95,7 +137,7 @@ def rotation():
             print(i)
             jpegList.append(i) 
         time.sleep(1)
-        userOpen = input('\nWhich images would you like to rotate?: ')
+        userOpen = input('\nWhich images would you like to rotate?: ').lower()
         if userOpen in (jpegList): 
             break
         else: 
@@ -108,48 +150,110 @@ def rotation():
         userDegree = input("By what degree would you like to rotate the image? (90, 180, 270): ")
         if userDegree == '90':
             rotatedImage = selectImage.transpose(Image.ROTATE_90)
+            rotatedImage.save('Password + Image Manipulation/image/rotated images/{}'.format('rotated 90 ' + userOpen))
             break
         if userDegree == '180':
             rotatedImage = selectImage.transpose(Image.ROTATE_180)
+            rotatedImage.save('Password + Image Manipulation/image/rotated images/{}'.format('rotated 180' + userOpen))
             break
         if userDegree == '270':
             rotatedImage = selectImage.transpose(Image.ROTATE_270)
+            rotatedImage.save('Password + Image Manipulation/image/rotated images/{}'.format('rotated 270' + userOpen))
             break
         else: 
             print("Invalid Input") 
             continue
     rotatedImage.show()
 
+# black and white
+def blackAndWhite():
+    jpegList = []
+    while True:
+        time.sleep(1)
+        for i in os.listdir('Password + Image Manipulation\image\jpeg images'):
+            print(i)
+            jpegList.append(i) 
+        time.sleep(1)
+        userOpen = input('\nWhich images would you like to change colors?: ').lower()
+        if userOpen in (jpegList): 
+            break
+        else: 
+            print("\nInvalid Input\n")
+            continue
+    
+    selectImage = Image.open('Password + Image Manipulation\image\jpeg images\{}'.format(userOpen))
+    selectImage = selectImage.convert("L")
+    selectImage.save('Password + Image Manipulation/image/black and white/{}'.format('black and white ' + userOpen))
+    selectImage.show()
+
+# blur images
+def blur():
+    jpegList = []
+    while True:
+        time.sleep(1)
+        for i in os.listdir('Password + Image Manipulation\image\jpeg images'):
+            print(i)
+            jpegList.append(i) 
+        time.sleep(1)
+        userOpen = input('\nWhich images would you like to blur?: ').lower()
+        if userOpen in (jpegList): 
+            break
+        else: 
+            print("\nInvalid Input\n")
+            continue
+
+    selectImage = Image.open('Password + Image Manipulation\image\jpeg images\{}'.format(userOpen))
+    while True:
+        try: #try statement very cool, uses error message like an if else value
+            userRadius = int(input("By how much do you want the image to be blurred? (1-10): "))
+            break
+        except ValueError:
+            print("Invalid Input")
+        #originally was going to make a number list from 0-9 and do a if else statement on if userRadius had at least one value
+        #from the number list but that wouldve been a mess and turns out try statement is a thing very cool. i think i tried
+        #using it once. dont remember if it worked or not but is still very cool
+
+    blurImage = selectImage.filter(ImageFilter.GaussianBlur(radius = userRadius))
+    blurImage.show() 
+    blurImage.save('Password + Image Manipulation/image/blur/{}'.format('blurred ' + userOpen))
+
+# * sharpen *
+def sharp():
+    jpegList = []
+    while True:
+        time.sleep(1)
+        for i in os.listdir('Password + Image Manipulation\image\jpeg images'):
+            print(i)
+            jpegList.append(i) 
+        time.sleep(1)
+        userOpen = input('\nWhich images would you like to blur?: ').lower()
+        if userOpen in (jpegList): 
+            break
+        else: 
+            print("\nInvalid Input\n")
+            continue
+    selectImage = Image.open('Password + Image Manipulation\image\jpeg images\{}'.format(userOpen))
+
+    sharpImage = selectImage.filter(ImageFilter.SHARPEN)
+    sharpImage.show()
+    sharpImage.save('Password + Image Manipulation/image/sharp/{}'.format('sharpened ' + userOpen))
 
 
 
 
 
 #----------------------------------------------Running Code-----------------------------------------------
+
 """
-openImageJpeg()
-while True:
-    continOpen = input("\nWould you like to open another image? (Y/N): ").upper()
-    if continOpen == 'Y':
-        openImageJpeg()
-    if continOpen == 'N':
-        break
-    else:
-        print('Invalid Response')
-        continue
+List of Functions:
+
+openImageJpeg() => open images in jpeg folder
+jpegToPng() => convert jpeg to png
+openImagePng() => open images in png folder
+thumbnail() => make thumbnail according to user's requested size
+rotation() => rotate an image
+blackAndWhite() => turn image black and white
+blur() => blur an image
+sharp() => sharpen an image
 """
-"""
-openImagePng()
-while True:
-    continOpen = input("\nWould you like to open another image? (Y/N): ").upper()
-    if continOpen == 'Y':
-        openImagePng()
-    if continOpen == 'N':
-        break
-    else:
-        print('Invalid Response')
-        continue
-"""   
-#jpegToPng()
-#thumbnail()
-rotation()
+
