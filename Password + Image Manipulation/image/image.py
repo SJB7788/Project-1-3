@@ -15,7 +15,10 @@ One thing to note:
 # function for user to input what image they want to view
 # Jpeg folder
 def openImageJpeg():
-    jpegList = [] 
+    jpegList = [] #this while true statement is copied and pasted in every function. very useful honestly
+    #i thought of making this section a function to make the code shroter but i assumed that the userOpen variable would not work
+    #outside of that function and wouldn't translate over to the function its being called in. not sure if i am wrong but if I
+    #am, i just wasted like 50+ lines of code space for no reason
     while True:
         time.sleep(1)
         for i in os.listdir('Password + Image Manipulation\image\jpeg images'):
@@ -28,15 +31,16 @@ def openImageJpeg():
         else: 
             print("\nInvalid Input\n")
             continue
+
     open = Image.open('Password + Image Manipulation\image\jpeg images\{}'.format(userOpen))
     open.show()
 
     while True:
         continOpen = input("\nWould you like to open another image? (Y/N): ").upper()
-        
         if continOpen == 'Y':
             openImageJpeg()
         if continOpen == 'N':
+            print("")
             break
         else:
             print('Invalid Response')
@@ -69,6 +73,7 @@ def openImagePng():
         if continOpen == 'Y':
             openImagePng()
         if continOpen == 'N':
+            print("")
             break
         else:
             print('Invalid Response')
@@ -81,6 +86,8 @@ def jpegToPng():
             f = Image.open('Password + Image Manipulation\image\jpeg images' "/" + str(i))
             fn, fext = os.path.splitext(i)
             f.save('Password + Image Manipulation\image\png images\{}.png'.format(fn))
+    
+    print("Saved all images to png folder\n")
 
 # function for thumbnails
 def thumbnail():
@@ -121,6 +128,21 @@ def thumbnail():
         else:
             print("Invalid Input")
             continue
+    
+    while True: #asking for repeat
+        repeatRequest = input("Would you like to edit again? (Y/N): ").upper()
+        if repeatRequest == "Y":
+            thumbnail()
+            break
+        if repeatRequest == "N":
+            print("")
+            break
+        if repeatRequest == "YO": #easter egg i guess lol
+            print("Yo how you doin'\n")
+            continue
+        else:
+            print("Invalid Input\n")
+            continue
 
 # rotate images, show and save
 def rotation():
@@ -140,7 +162,7 @@ def rotation():
 
     selectImage = Image.open('Password + Image Manipulation\image\jpeg images\{}'.format(userOpen))
 
-    while True:
+    while True: #this while true statement should be straightforward
         userDegree = input("By what degree would you like to rotate the image? (90, 180, 270): ")
         if userDegree == '90':
             rotatedImage = selectImage.transpose(Image.ROTATE_90)
@@ -158,6 +180,21 @@ def rotation():
             print("Invalid Input") 
             continue
     rotatedImage.show()
+
+    while True: #asking for repeat
+        repeatRequest = input("Would you like to edit again? (Y/N): ").upper()
+        if repeatRequest == "Y":
+            rotation()
+            break
+        if repeatRequest == "N":
+            print("")
+            break
+        if repeatRequest == "MOO":
+            print("Cow\n")
+            continue
+        else:
+            print("Invalid Input\n")
+            continue
 
 # black and white
 def blackAndWhite():
@@ -179,6 +216,22 @@ def blackAndWhite():
     selectImage = selectImage.convert("L")
     selectImage.save('Password + Image Manipulation/image/black and white/{}'.format('black and white ' + userOpen))
     selectImage.show()
+
+    while True: #asking for repeat 
+        repeatRequest = input("Would you like to edit again? (Y/N): ").upper()
+        if repeatRequest == "Y":
+            blackAndWhite()
+            break
+        if repeatRequest == "N":
+            print("")
+            break
+        if repeatRequest == "E": #easter egg i guess lol
+            for i in range(5):
+                print("E")
+            continue
+        else:
+            print("Invalid Input\n")
+            continue
 
 # blur images
 def blur():
@@ -211,6 +264,20 @@ def blur():
     blurImage.show() 
     blurImage.save('Password + Image Manipulation/image/blur/{}'.format('blurred ' + userOpen))
 
+    while True: #asking for repeat 
+        repeatRequest = input("Would you like to edit again? (Y/N): ").upper()
+        if repeatRequest == "Y":
+            blur()
+            break
+        if repeatRequest == "N":
+            print("")
+            break
+        if repeatRequest == "A": #easter egg i guess lol
+            print("shark")
+        else:
+            print("Invalid Input\n")
+            continue
+
 # * sharpen *
 def sharp():
     jpegList = []
@@ -228,16 +295,29 @@ def sharp():
             continue
     selectImage = Image.open('Password + Image Manipulation\image\jpeg images\{}'.format(userOpen))
 
-    sharpImage = selectImage.filter(ImageFilter.SHARPEN)
-    sharperImage = sharpImage.filter(ImageFilter.SHARPEN)
-    sharpererImage = sharperImage.filter(ImageFilter.SHARPEN)
-    sharpererImage.show()
-    sharpererImage.save('Password + Image Manipulation/image/sharp/{}'.format('sharpened ' + userOpen))
+    sharpImage = selectImage.filter(ImageFilter.SHARPEN) #Sharp once
+    for i in range(3): #Sharp three more times >:D
+        sharpImage = sharpImage.filter(ImageFilter.SHARPEN)
+    sharpImage.show()
+    sharpImage.save('Password + Image Manipulation/image/sharp/{}'.format('sharpened ' + userOpen))
+
+    while True: #asking for repeat 
+        repeatRequest = input("Would you like to edit again? (Y/N): ").upper()
+        if repeatRequest == "Y":
+            sharp()
+            break
+        if repeatRequest == "N":
+            print("")
+            break
+        if repeatRequest == "SHARP": #easter egg i guess lol
+            print("SHARP")
+            continue
+        else:
+            print("Invalid Input\n")
+            continue
 
 
-
-
-#----------------------------------------------Running Code-----------------------------------------------
+#-------------------------------------------------Running Code---------------------------------------------------
 
 """
 List of Functions:
@@ -252,3 +332,7 @@ blur() => blur an image
 sharp() => sharpen an image
 """
 
+rotation()
+blackAndWhite()
+blur()
+sharp()
