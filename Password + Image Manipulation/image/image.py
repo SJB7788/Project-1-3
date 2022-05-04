@@ -12,12 +12,6 @@ One thing to note:
     folder, you will have to convert jpeg to png first and then view png file
 """
 
-
-
-
-
-
-
 # function for user to input what image they want to view
 # Jpeg folder
 def openImageJpeg():
@@ -226,7 +220,7 @@ def sharp():
             print(i)
             jpegList.append(i) 
         time.sleep(1)
-        userOpen = input('\nWhich images would you like to blur?: ').lower()
+        userOpen = input('\nWhich images would you like to sharpen?: ').lower()
         if userOpen in (jpegList): 
             break
         else: 
@@ -235,9 +229,10 @@ def sharp():
     selectImage = Image.open('Password + Image Manipulation\image\jpeg images\{}'.format(userOpen))
 
     sharpImage = selectImage.filter(ImageFilter.SHARPEN)
-    sharpImage.show()
-    sharpImage.save('Password + Image Manipulation/image/sharp/{}'.format('sharpened ' + userOpen))
-
+    sharperImage = sharpImage.filter(ImageFilter.SHARPEN)
+    sharpererImage = sharperImage.filter(ImageFilter.SHARPEN)
+    sharpererImage.show()
+    sharpererImage.save('Password + Image Manipulation/image/sharp/{}'.format('sharpened ' + userOpen))
 
 
 
