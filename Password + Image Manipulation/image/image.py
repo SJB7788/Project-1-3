@@ -332,7 +332,3 @@ blur() => blur an image
 sharp() => sharpen an image
 """
 
-rotation()
-blackAndWhite()
-blur()
-sharp()
