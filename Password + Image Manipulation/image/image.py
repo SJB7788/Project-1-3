@@ -332,4 +332,3 @@ blur() => blur an image
 sharp() => sharpen an image
 """
 
-openImageJpeg()
