@@ -9,6 +9,11 @@ FPS = 60
 SPEED = 10
 
 SKYBLUE = (3, 171, 255)
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+
+BORDER = pygame.Rect(WIDTH/2 - 5, 0, 10, HEIGHT)
+
 PACMAN_SIZE = 55
 # adding the pacman image
 PACMAN1_IMAGE = pygame.image.load('Pygame/assets/pacman.png')
@@ -19,27 +24,28 @@ PACMAN2 = pygame.transform.rotate(pygame.transform.scale(PACMAN2_IMAGE, (PACMAN_
 
 # PACMAN 1 Controls
 def pacman1_handle_movement(keys_pressed, red):
-    if keys_pressed[pygame.K_w]: #UP
+    if keys_pressed[pygame.K_w] and red.y > 0: #UP
         red.y -= SPEED
-    if keys_pressed[pygame.K_s]: #DOWN
+    if keys_pressed[pygame.K_s] and red.y + red.height + SPEED < HEIGHT: #DOWN
         red.y += SPEED
-    if keys_pressed[pygame.K_a]: #LEFT
+    if keys_pressed[pygame.K_a] and red.x - SPEED > 0: #LEFT
         red.x -= SPEED
-    if keys_pressed[pygame.K_d]: #RIGHT
+    if keys_pressed[pygame.K_d] and red.x + red.width + SPEED < BORDER.x - 5: #RIGHT
         red.x += SPEED
 # PACMAN 2 Controls
 def pacman2_handle_movement(keys_pressed, yellow):
-    if keys_pressed[pygame.K_UP]: #UP
+    if keys_pressed[pygame.K_UP] and yellow.y > 0: #UP
         yellow.y -= SPEED
-    if keys_pressed[pygame.K_DOWN]: #DOWN
+    if keys_pressed[pygame.K_DOWN] and yellow.y + yellow.height + SPEED < HEIGHT: #DOWN
         yellow.y += SPEED
-    if keys_pressed[pygame.K_LEFT]: #LEFT
+    if keys_pressed[pygame.K_LEFT] and yellow.x - SPEED > BORDER.x + BORDER.width: #LEFT
         yellow.x -= SPEED
-    if keys_pressed[pygame.K_RIGHT]: #RIGHT
+    if keys_pressed[pygame.K_RIGHT] and yellow.x + SPEED < WIDTH - PACMAN_SIZE: #RIGHT
         yellow.x += SPEED
 # Window Stuff
 def window_custom(red, yellow):
     WIN.fill(SKYBLUE)
+    pygame.draw.rect(WIN, WHITE, BORDER)
     WIN.blit(PACMAN1, (red.x, red.y))
     WIN.blit(PACMAN2, (yellow.x, yellow.y))
     pygame.display.update()
