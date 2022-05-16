@@ -331,4 +331,4 @@ blackAndWhite() => turn image black and white
 blur() => blur an image
 sharp() => sharpen an image
 """
-
+openImageJpeg()
