@@ -23,6 +23,7 @@ BORDER = pygame.Rect(0, HEIGHT/2 - 10, WIDTH, 20)
 #sound files
 BULLET_HIT_SOUND = pygame.mixer.Sound('Pygame/assets/pacman_eatghost.wav')
 BULLET_FIRE_SOUND = pygame.mixer.Sound('Pygame/assets/pacman_chomp.mp3')
+WIN_SOUND = pygame.mixer.Sound('Pygame/assets/pacman_death.wav')
 
 PAC_FONT = pygame.font.Font('Pygame/assets/crackman.ttf', 20)
 WIN_PAC_FONT = pygame.font.Font('Pygame/assets/crackman.ttf', 50)
@@ -142,7 +143,7 @@ def main():
                 yellow_health -= 1
                 BULLET_HIT_SOUND.play()
         
-        winner_text = ""
+        winner_text = "" 
 
         if red_health <= 0:
             winner_text = "Gray Wins!"
@@ -152,6 +153,7 @@ def main():
         
         if winner_text != "":
             winner(winner_text)
+            WIN_SOUND.play()
             break
 
         keys_pressed = pygame.key.get_pressed()
