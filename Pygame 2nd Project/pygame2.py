@@ -231,6 +231,10 @@ while True:
         if int(score) >= SCORE_TALLY:
             OB_SPEED += 10
             SCORE_TALLY += 10
+            if SCORE_TALLY == 20:
+                pygame.time.set_timer(obstacle_timer, 1100)
+            if SCORE_TALLY == 50:
+                pygame.time.set_timer(obstacle_timer, 800)
             if SCORE_TALLY == 60:
                 OB_SPEED = 6
             if SCORE_TALLY == 100:
