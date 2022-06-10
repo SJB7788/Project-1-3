@@ -175,6 +175,7 @@ game_message = test_font.render('Press S to play', False, (111, 196, 169))
 game_message_rect = game_message.get_rect(center = (400, 300))
 
 obstacle_rate = 1200
+
 # Timer
 obstacle_timer = pygame.USEREVENT + 1
 pygame.time.set_timer(obstacle_timer, obstacle_rate)
