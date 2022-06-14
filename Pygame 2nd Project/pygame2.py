@@ -204,7 +204,7 @@ while True:
             if event.type == obstacle_timer:
                 obstacle_group.add(Obstacle(choice(['fly', 'snail', 'snail', 'snail'])))
                 
-            if event.type == snail_animation_timer:
+            """if event.type == snail_animation_timer:
                 if snail_frame_index == 0:
                     snail_frame_index = 1
                 else:
@@ -216,7 +216,7 @@ while True:
                     fly_frame_index = 1
                 else:
                     fly_frame_index = 0
-                fly_surface = fly_frames[fly_frame_index]
+                fly_surface = fly_frames[fly_frame_index]"""
         else:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_s and game_active == False:
