@@ -84,7 +84,7 @@ def display_score():
     screen.blit(score_surf, score_rect)
     return time
 
-def obstacle_movement(obstacle_list):
+"""def obstacle_movement(obstacle_list):
     if obstacle_list:
         for obstacle_rect in obstacle_list:
             obstacle_rect.x -= 10
@@ -98,7 +98,7 @@ def obstacle_movement(obstacle_list):
         return obstacle_list
     else: 
         return []
-
+"""
 def collisions():
     if pygame.sprite.spritecollide(player.sprite, obstacle_group, False):
         obstacle_group.empty()
